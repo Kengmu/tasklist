@@ -25,7 +25,6 @@ public class ShowServlet extends HttpServlet {
      */
     public ShowServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -34,12 +33,10 @@ public class ShowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        // 該当のIDのメッセージ1件のみをデータベースから取得
         Tasklist t = em.find(Tasklist.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
-        // メッセージデータをリクエストスコープにセットしてshow.jspを呼び出す
         request.setAttribute("tasklist", t);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/show.jsp");

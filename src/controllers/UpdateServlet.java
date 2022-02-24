@@ -41,15 +41,12 @@ public class UpdateServlet extends HttpServlet {
             Tasklist t = em.find(Tasklist.class, (Integer)(request.getSession().getAttribute("tasklist_id")));
 
 
-            // mの各フィールドにデータを代入
-
             String content = request.getParameter("content");
             t.setContent(content);
 
-            Timestamp currentTime = new Timestamp(System.currentTimeMillis());     // 現在の日時を取得
+            Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             t.setUpdated_at(currentTime);
 
-            // データベースに保存
             em.getTransaction().begin();
             em.getTransaction().commit();
             em.close();
